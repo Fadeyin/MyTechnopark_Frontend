@@ -6,20 +6,20 @@
         <v-form  ref="form">
           <v-text-field
               autofocus
-              label="title"
+              label="Заголовок"
               v-model="title"
               required
               counter="80"
           ></v-text-field>
           <v-text-field
-              label="link"
+              label="Ссылка"
               v-model="link"
               ref="link"
               required
               counter="80"
           ></v-text-field>
           <v-textarea
-              label="body"
+              label="Описание"
               v-model="body"
               counter="250"
           ></v-textarea>

@@ -34,7 +34,7 @@
           <v-icon>arrow_drop_down</v-icon>
         </v-btn>
         <v-list>
-          <v-list-tile :to="{name: 'Profile'}">
+          <v-list-tile :to="{name: 'Профиль'}">
             <v-list-tile-title>Профайл</v-list-tile-title>
           </v-list-tile>
           <v-list-tile :to="{name: 'ChangePassword'}">

@@ -64,7 +64,7 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'Вход',
       component: Login,
       beforeEnter: ifNotAuthenticated
     },
@@ -76,13 +76,13 @@ export default new Router({
     },
     {
       path: '/sign-ib',
-      name: 'SignIn',
+      name: 'Регистрация',
       component: SignIn,
       beforeEnter: ifNotAuthenticated
     },
     {
       path: '/profile',
-      name: 'Profile',
+      name: 'Профиль',
       component: Profile,
       beforeEnter: ifAuthenticated
     },
