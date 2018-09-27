@@ -31,7 +31,7 @@
             </router-link>
           </v-flex>
           <v-flex class="text-xs-right">
-            <router-link :to="{ name: 'SignIn'}">
+            <router-link :to="{ name: 'Регистрация'}">
               Регистрация
             </router-link>
           </v-flex>
@@ -118,7 +118,7 @@
           .then((response) => {
             this.loginProcedure({user: response.data, token: response.auth.token})
             Api.token = response.auth
-            this.$router.push({name: 'Index'})
+            this.$router.push({name: 'Объявления'})
           })
           .catch(error => {
             this.gatherErrors(error)

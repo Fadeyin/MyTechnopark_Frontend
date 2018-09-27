@@ -3,7 +3,7 @@ let production = {
   DEBUG_MODE: false,
   APP_NAME: 'Мой Технопарк',
   APP_ID: 'bootstrap',
-  API_URL: '/api/'
+  API_URL: 'http://90.150.146.248:3333/api/v1/'
 }
 
 let development = Object.assign({}, production, {

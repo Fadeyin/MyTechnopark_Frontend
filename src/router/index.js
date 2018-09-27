@@ -75,7 +75,7 @@ export default new Router({
       beforeEnter: ifNotAuthenticated
     },
     {
-      path: '/sign-ib',
+      path: '/sign-in',
       name: 'Регистрация',
       component: SignIn,
       beforeEnter: ifNotAuthenticated

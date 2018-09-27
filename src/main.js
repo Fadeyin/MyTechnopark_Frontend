@@ -7,7 +7,6 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
 import VueCordova from 'vue-cordova'
 import VueHead from 'vue-head'
-
 import App from './App'
 import store from './store'
 import router from './router'

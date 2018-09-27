@@ -11,6 +11,7 @@
   </v-app>
 </template>
 <style>
+@import "~font-awesome/css/font-awesome.min.css";
   html {
     overflow-y: auto
   }
@@ -50,7 +51,7 @@ export default {
         result.push({
           text: 'Zone 1',
           icon: 'mdi-file-image',
-          to: {path: '/1'}
+          to: {path: '/ads'}
         })
         result.push({
           text: 'Zone 2',

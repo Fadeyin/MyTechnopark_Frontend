@@ -12,7 +12,7 @@
       href="#/ads"
       value="ads"
     >
-      <v-icon>fa-bell-o</v-icon>
+      <v-icon style=round>dashboard</v-icon>
     </v-btn>
 
     <v-btn
@@ -21,7 +21,7 @@
       href="#/request"
       value="request"
     >
-      <v-icon>fa-pencil-square-o</v-icon>
+      <v-icon style=round>assignment</v-icon>
     </v-btn>
 
     <v-btn
@@ -31,7 +31,7 @@
       value="chats"
 
     >
-      <v-icon>fa-comments-o</v-icon>
+      <v-icon style=round>question_answer</v-icon>
     </v-btn>
 
     <v-btn
@@ -39,7 +39,7 @@
       flat
       value="complaints"
     >
-      <v-icon>fa-exclamation-triangle</v-icon>
+      <v-icon style=round>warning</v-icon>
     </v-btn>
 
     <v-btn
@@ -47,7 +47,7 @@
       flat
       value="more"
     >
-      <v-icon>fa-bars</v-icon>
+      <v-icon style=round>menu</v-icon>
     </v-btn>
 	</v-bottom-nav>
   </div>           
@@ -74,7 +74,7 @@
   .v-bottom-nav .v-btn {
     min-width: unset !important;
     opacity: 1 !important;
-   /* width: 19% !important; */
+	width: 40% !important;
   }
   .v-bottom-nav {
     box-shadow: 0 0.1px 14px 3px rgba(0, 0, 0, 0.12) !important;
