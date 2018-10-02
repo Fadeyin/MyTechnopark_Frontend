@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-mobile-with-auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Vuetify project running in Cordova",
   "author": "Yurii Timofeyev <georgius@ural.ru>",
   "private": true,
