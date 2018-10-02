@@ -1,9 +1,10 @@
 <template>
-<v-container fluid grid-list-lg>
-<v-layout row wrap>
-  <v-flex xs12 sm6 offset-sm3 v-on:click="dialog = true">
+<v-container fluid grid-list-lg> 
+ <v-layout row wrap>
+  <v-flex xs12 sm6 offset-sm3 >
     <v-card
-	  v-for="(news) in news"
+	  v-for="news in news"
+	  :key="news.id"
       style="margin-bottom: 10px !important;"
     >
       <v-card-title primary-title>
@@ -15,8 +16,8 @@
       <v-divider></v-divider>
       <v-card-actions>
         <div class="left">
-          <div class="timeBlock">{{ news.at }}</div>
-          <div class="dateBlock">{{ news.at }}</div>
+          <div class="timeBlock">{{ news.time }}</div>
+          <div class="dateBlock">{{ news.date }}</div>
         </div>
         <v-spacer></v-spacer>
         <div class="right">
@@ -30,59 +31,28 @@
             Администрация
           </v-chip>
         </div>
-      </v-card-actions>
+          <v-btn color="grey" icon v-on:click="show = !show">
+            <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-slide-y-transition>
+          <v-card-text v-show="show">
+            <span v-html="news.body"></span>
+          </v-card-text>
+        </v-slide-y-transition>
     </v-card>
-  </v-flex>
+   </v-flex>
   <v-btn :to="{name: 'Создать объявление'}" style="margin-bottom: 55px;"
         color="yellow"
         fab
         fixed
         bottom
         right
-		
       >
         <v-icon>add</v-icon>
       </v-btn>
-    <!--- Начало Модального окно -->
-    <v-dialog
-      v-model="dialog"
-      width="500"
-      v-for="(news) in news"
-    >
-      <v-card>
-        <v-card-title
-          class="headline grey lighten-2"
-          primary-title
-        >
-          {{ news.title }}
-        </v-card-title>
-
-        <v-card-text>
-          <span v-html="news.body"></span>
-        </v-card-text>
-		<v-card-text>
-          <span v-html="news.link"></span>
-        </v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <div class="left">
-            <div class="timeBlock">{{ news.at }}</div>
-            <div class="dateBlock">{{ news.at }}</div>
-          </div>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            flat
-            @click="dialog = false"
-          >
-            Закрыть
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Конец Модального окна -->
   </v-layout>
-  </v-container>
+ </v-container> 
 </template>
 
 <script>
@@ -94,7 +64,7 @@
       name: 'AdsPage',
       data () {
         return {
-          dialog: false,
+		  show: false,
 		  news: true
         }
       },

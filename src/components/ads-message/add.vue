@@ -61,7 +61,7 @@
         })
           .then((response) => {
             this.newsAddProcedure(response.data)
-            this.$router.push({name: 'ads'})
+            this.$router.push({name: 'Объявления'})
           })
       },
 	  ...mapMutations({

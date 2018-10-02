@@ -59,7 +59,7 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index,
+      component: AdsPage,
       beforeEnter: ifAuthenticated
     },
     {
