@@ -1,5 +1,9 @@
 <template>
-  <h1>Test 1</h1>
+	<v-card>
+		<v-card-text>
+           Этот раздел находится в разработке 
+        </v-card-text>
+	</v-card>
 </template>
 
 <script>
@@ -11,9 +15,3 @@
       }
     }
 </script>
-
-
-
-<style scoped>
-
-</style>

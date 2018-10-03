@@ -2,13 +2,14 @@
 <v-container fluid grid-list-lg> 
  <v-layout row wrap>
   <v-flex xs12 sm6 offset-sm3 >
+  <div v-for="(news, index) in news" :key="news.index" v-on:click="showOnCreate()">
     <v-card
-	  v-for="news in news"
-	  :key="news.id"
-      style="margin-bottom: 10px !important;"
+	  
+	  hover
+      style="margin-bottom: 12px !important;"
     >
       <v-card-title primary-title>
-        <div>
+        <div >
           <div class="headline">{{ news.title }}</div>
           <span class="grey--text">{{ news.link }}</span>
         </div>
@@ -31,9 +32,7 @@
             Администрация
           </v-chip>
         </div>
-          <v-btn color="grey" icon v-on:click="show = !show">
             <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-          </v-btn>
         </v-card-actions>
         <v-slide-y-transition>
           <v-card-text v-show="show">
@@ -41,6 +40,7 @@
           </v-card-text>
         </v-slide-y-transition>
     </v-card>
+	</div>
    </v-flex>
   <v-btn :to="{name: 'Создать объявление'}" style="margin-bottom: 55px;"
         color="yellow"
@@ -80,7 +80,10 @@
           .then(response => {
             this.news = response.data
           })
-      }
+      },
+	  showOnCreate(){
+	  this.show = !this.show
+	  }
 	},
 	};
 </script>

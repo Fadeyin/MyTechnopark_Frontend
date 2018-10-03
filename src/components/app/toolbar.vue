@@ -62,41 +62,7 @@
     width: auto;
     filter: grayscale(100%) contrast(0%) brightness(200%);
   }
-</style>
-<script type="text/babel">
-  import config from '@/config'
-  import {mapGetters} from 'vuex'
-  export default {
-    name: 'Toolbar',
-    metaInfo: {
-      title: 'My Awesome Webapp'
-    },
-    props: {
-      value: {
-        required: true
-      }
-    },
-    computed: {
-      config () {
-        return config
-      },
-      hasMenu () {
-        return Array.isArray(this.items) && this.items.length
-      },
-      menuItems () {
-        return this.items
-      },
-      ...mapGetters('account', [
-        'user',
-        'isAuthenticated'
-      ]),
-      ...mapGetters([
-      ])
-    }
-  }
-</script>
-<style scoped>
-  .v-toolbar__title {
+    .v-toolbar__title {
     text-align: center !important;
     align-items: center !important;
   }
@@ -149,4 +115,37 @@
     color: #fff;
     margin-right: 15px;
   }
-  </style>
+</style>
+
+<script type="text/babel">
+  import config from '@/config'
+  import {mapGetters} from 'vuex'
+  export default {
+    name: 'Toolbar',
+    metaInfo: {
+      title: 'My Awesome Webapp'
+    },
+    props: {
+      value: {
+        required: true
+      }
+    },
+    computed: {
+      config () {
+        return config
+      },
+      hasMenu () {
+        return Array.isArray(this.items) && this.items.length
+      },
+      menuItems () {
+        return this.items
+      },
+      ...mapGetters('account', [
+        'user',
+        'isAuthenticated'
+      ]),
+      ...mapGetters([
+      ])
+    }
+  }
+</script>
