@@ -2,27 +2,20 @@
 <v-container fluid grid-list-lg> 
  <v-layout row wrap>
   <v-flex xs12 sm6 offset-sm3 >
-  <div v-for="(news, index) in news" :key="news.index" v-on:click="showOnCreate()">
+  <div v-for="(news) in news" :key="news.id" v-on:click="showOnCreate(news.id)">
     <v-card
-	  
 	  hover
       style="margin-bottom: 12px !important;"
     >
       <v-card-title primary-title>
-        <div >
+		  <div class="timeBlock" style="position:absolute; top:8px; right: 10px;">{{ news.time }},{{ news.date }}</div>
           <div class="headline">{{ news.title }}</div>
-          <span class="grey--text">{{ news.link }}</span>
-        </div>
+          <span class="grey--text">{{ news.link }}</span>	  
       </v-card-title>
       <v-divider></v-divider>
       <v-card-actions>
         <div class="left">
-          <div class="timeBlock">{{ news.time }}</div>
-          <div class="dateBlock">{{ news.date }}</div>
-        </div>
-        <v-spacer></v-spacer>
-        <div class="right">
-          <v-chip light>
+		  <v-chip outline color="green">
             <v-avatar class="teal">
               <img
                 src="https://is5-ssl.mzstatic.com/image/thumb/Purple117/v4/e3/7a/f8/e37af865-7a07-286e-7033-e02bd846814f/mzl.zeymfhnn.jpg/246x0w.jpg"
@@ -32,10 +25,14 @@
             Администрация
           </v-chip>
         </div>
-            <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+        <v-spacer></v-spacer>
+		<div style="visibility: hidden">{{ show }}</div>
+        <div class="right">   
+		<v-icon>{{ myMap.get(news.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>  
+        </div>
         </v-card-actions>
         <v-slide-y-transition>
-          <v-card-text v-show="show">
+          <v-card-text v-show="myMap.get(news.id)">
             <span v-html="news.body"></span>
           </v-card-text>
         </v-slide-y-transition>
@@ -65,7 +62,8 @@
       data () {
         return {
 		  show: false,
-		  news: true
+		  news: true,
+		  myMap: false,
         }
       },
 	mounted () {
@@ -79,10 +77,19 @@
         })
           .then(response => {
             this.news = response.data
+			var myMap = new Map();
+				this.news.forEach(function(news_item) 
+				{					
+					news_item.id==0 ? myMap.set(news_item.id, true) : myMap.set(news_item.id, false);
+				})
+				this.myMap = myMap;
           })
       },
-	  showOnCreate(){
-	  this.show = !this.show
+	  showOnCreate(id){
+	  this.show=!this.show
+		var myMap = this.myMap;
+		myMap.set(id, !myMap.get(id))
+		this.myMap = myMap;
 	  }
 	},
 	};

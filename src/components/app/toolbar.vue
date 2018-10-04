@@ -17,6 +17,7 @@
   <!--  <v-spacer/> -->
 <v-toolbar-items >
    <!--<v-toolbar-items>-->
+	<div class="right">
       <v-menu offset-y v-if="isAuthenticated">
         <v-btn
 		  flat
@@ -45,6 +46,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+	 </div>
     </v-toolbar-items>
   </v-toolbar>
 </template>
