@@ -8,14 +8,14 @@
       style="margin-bottom: 12px !important;"
     >
       <v-card-title primary-title>
-		  <div class="timeBlock" style="position:absolute; top:8px; right: 10px;">{{ news.time }},{{ news.date }}</div>
+		  <div class="grey--text" style="font-size: 0.9em; position:absolute; top:8px; right: 10px;">{{ changeData(DTime)  }}</div>
           <div class="headline">{{ news.title }}</div>
           <span class="grey--text">{{ news.link }}</span>	  
       </v-card-title>
       <v-divider></v-divider>
       <v-card-actions>
         <div class="left">
-		  <v-chip outline color="green">
+		  <v-chip color="blue-grey lighten-4">
             <v-avatar class="teal">
               <img
                 src="https://is5-ssl.mzstatic.com/image/thumb/Purple117/v4/e3/7a/f8/e37af865-7a07-286e-7033-e02bd846814f/mzl.zeymfhnn.jpg/246x0w.jpg"
@@ -31,7 +31,9 @@
 		<v-icon>{{ myMap.get(news.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>  
         </div>
         </v-card-actions>
+		<v-divider></v-divider>
         <v-slide-y-transition>
+		
           <v-card-text v-show="myMap.get(news.id)">
             <span v-html="news.body"></span>
           </v-card-text>
@@ -47,6 +49,13 @@
         right
       >
         <v-icon>add</v-icon>
+      </v-btn>
+	  <v-btn :to="{name: 'Объявления'}" style="margin-bottom: 55px;"
+        color="blue-grey lighten-4"
+        bottom
+		block
+      >
+        Загрузить ещё объявления
       </v-btn>
   </v-layout>
  </v-container> 
@@ -64,6 +73,7 @@
 		  show: false,
 		  news: true,
 		  myMap: false,
+		  DTime: "2012-04-23T23:25:43.511Z"
         }
       },
 	mounted () {
@@ -78,10 +88,6 @@
           .then(response => {
             this.news = response.data
 			var myMap = new Map();
-				this.news.forEach(function(news_item) 
-				{					
-					news_item.id==0 ? myMap.set(news_item.id, true) : myMap.set(news_item.id, false);
-				})
 				this.myMap = myMap;
           })
       },
@@ -90,7 +96,20 @@
 		var myMap = this.myMap;
 		myMap.set(id, !myMap.get(id))
 		this.myMap = myMap;
-	  }
+	  },
+	  changeData(time){
+	  var t = new Date(time)
+	  var options = {
+		year: 'numeric',
+		month: 'numeric',
+		day: 'numeric',
+		timezone: 'UTC',
+		hour: 'numeric',
+		minute: 'numeric',
+		};
+		var ti = (t.toLocaleString("ru", options));
+		return ti;
+	  }	  
 	},
 	};
 </script>
