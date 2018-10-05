@@ -8,10 +8,12 @@
       style="margin-bottom: 12px !important;"
     >
       <v-card-title primary-title>
-		  <div class="grey--text" style="font-size: 0.9em; position:absolute; top:8px; right: 10px;">{{ changeData(DTime)  }}</div>
-          <div class="headline">{{ news.title }}</div>
-          <span class="grey--text">{{ news.link }}</span>	  
+          <div class="headline">{{news.title}}</div>
+		  <p><div class="grey--text" style="font-size: 0.9em; ">{{changeData(DTime)}}</div></p>	  
       </v-card-title>
+	  <v-card-text>
+            <span class="grey--text">{{ news.link }}</span>
+          </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
         <div class="left">
@@ -33,15 +35,20 @@
         </v-card-actions>
 		<v-divider></v-divider>
         <v-slide-y-transition>
-		
           <v-card-text v-show="myMap.get(news.id)">
             <span v-html="news.body"></span>
           </v-card-text>
         </v-slide-y-transition>
     </v-card>
-	</div>
+	</div> 
+	  <v-btn :to="{name: 'Объявления'}"
+        color="blue-grey lighten-4"
+		block
+      >
+        Загрузить ещё объявления
+      </v-btn>
    </v-flex>
-  <v-btn :to="{name: 'Создать объявление'}" style="margin-bottom: 55px;"
+  <v-btn :to="{name: 'Создать объявление'}"  style="visibility: hidden; margin-bottom: 55px;"
         color="yellow"
         fab
         fixed
@@ -49,14 +56,7 @@
         right
       >
         <v-icon>add</v-icon>
-      </v-btn>
-	  <v-btn :to="{name: 'Объявления'}" style="margin-bottom: 55px;"
-        color="blue-grey lighten-4"
-        bottom
-		block
-      >
-        Загрузить ещё объявления
-      </v-btn>
+     </v-btn>
   </v-layout>
  </v-container> 
 </template>
@@ -100,12 +100,12 @@
 	  changeData(time){
 	  var t = new Date(time)
 	  var options = {
+		hour: 'numeric',
+		minute: 'numeric',
 		year: 'numeric',
 		month: 'numeric',
 		day: 'numeric',
 		timezone: 'UTC',
-		hour: 'numeric',
-		minute: 'numeric',
 		};
 		var ti = (t.toLocaleString("ru", options));
 		return ti;

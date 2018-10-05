@@ -16,6 +16,8 @@ const AdsPage = () => import('@/pages/ads')
 const RequestPage = () => import('@/pages/request')
 const ChatsPage = () => import('@/pages/chats')
 const AdsAdd = () => import('@/components/ads-message/add')
+const ComplaintsPage = () => import('@/pages/Complaints')
+const MorePage= () => import('@/pages/more')
 
 Vue.use(Router)
 Vue.use(Meta)
@@ -115,7 +117,7 @@ export default new Router({
       path: '/ads',
       name: 'Объявления',
       meta: {
-        icon: 'fa-bell-o'
+        icon: 'dashboard'
       },
       component: AdsPage,
 	  beforeEnter: ifAuthenticated
@@ -124,7 +126,7 @@ export default new Router({
       path: '/adsadd',
       name: 'Создать объявление',
       meta: {
-        icon: 'fa-bell-o'
+        icon: 'dashboard'
       },
       component: AdsAdd,
 	  beforeEnter: ifAuthenticated
@@ -133,7 +135,7 @@ export default new Router({
       path: '/request',
       name: 'Заявки',
       meta: {
-        icon: 'fa-pencil-square-o'
+        icon: 'assignment'
       },
       component: RequestPage,
 	  beforeEnter: ifAuthenticated
@@ -142,25 +144,27 @@ export default new Router({
       path: '/chats',
       name: 'Чаты',
       meta: {
-        icon: 'fa-comments-o'
+        icon: 'question_answer'
       },
       component: ChatsPage,
 	  beforeEnter: ifAuthenticated
     },
 	{
-      path: '/Complaints',
+      path: '/complaints',
       name: 'Жалобы',
       meta: {
-        icon: 'fa-pencil-square-o'
+        icon: 'warning'
       },
+	  component: ComplaintsPage,
 	  beforeEnter: ifAuthenticated
     },
 	{
-      path: '/More',
+      path: '/more',
       name: 'Еще',
       meta: {
-        icon: 'fa-comments-o'
+        icon: 'menu'
       },
+	  component: MorePage,
 	  beforeEnter: ifAuthenticated
     }
   ]

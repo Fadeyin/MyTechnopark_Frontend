@@ -1,12 +1,8 @@
 <template>
   <v-toolbar app color="primary" class="main-toolbar" dark prominent>
- <!--     <v-toolbar-side-icon
-        @click="$emit('input', !value)"
-      /> -->
-
     <v-toolbar-title>
         <div class="toolbarLogo">
-          <v-icon>{{ $route.meta.icon }}</v-icon>
+          <v-icon class="toolbarLogoi">{{$route.meta.icon}}</v-icon>
         </div>
     </v-toolbar-title>
     <v-card-text>
@@ -14,9 +10,7 @@
         <p class="text-xs-center" style="margin-bottom: 0px !important;">{{$route.name}}</p>
       </div>
     </v-card-text>
-  <!--  <v-spacer/> -->
-<v-toolbar-items >
-   <!--<v-toolbar-items>-->
+   <v-toolbar-items >
 	<div class="right">
       <v-menu offset-y v-if="isAuthenticated">
         <v-btn
@@ -50,7 +44,7 @@
     </v-toolbar-items>
   </v-toolbar>
 </template>
-<style>
+<style scoped>
   .main-toolbar {
     padding-bottom: 1px
   }
@@ -68,7 +62,7 @@
     text-align: center !important;
     align-items: center !important;
   }
-  .v-toolbar__items .v-btn, .v-toolbar__items .v-menu, .v-toolbar__items .v-menu__activator{
+  .v-toolbar__items .v-btn .v-toolbar__items .v-menu .v-toolbar__items .v-menu__activator{
     height: unset !important;
   }
   .mlst{
@@ -89,12 +83,11 @@
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-
     -webkit-box-shadow: 2px 2px 3px 0px rgba(50, 50, 50, 0.3);
     -moz-box-shadow:    2px 2px 3px 0px rgba(50, 50, 50, 0.3);
     box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.3);
   }
-  .toolbarLogo i{
+  .toolbarLogoi {
     font-size: 40px !important;
     height: auto !important;
     display: block !important;

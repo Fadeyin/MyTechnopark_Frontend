@@ -37,6 +37,7 @@
     <v-btn
       color="blue"
       flat
+	  href="#/complaints"
       value="complaints"
     >
       <v-icon style=round>warning</v-icon>
@@ -45,6 +46,7 @@
     <v-btn
       color="blue"
       flat
+	  href="#/more"
       value="more"
     >
       <v-icon style=round>menu</v-icon>
