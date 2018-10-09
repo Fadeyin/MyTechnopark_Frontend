@@ -1,7 +1,7 @@
 <template>
   <v-flex md6 offset-md3 xs12 class="mt-3">
     <v-card>
-      <panel-title :caption="'Создать объявление'" ></panel-title>
+      <panel-title :caption="'Создать жалобу'" ></panel-title>
       <v-card-text>
         <v-form  ref="form">
           <v-text-field
@@ -11,18 +11,11 @@
               required
               counter="80"
           ></v-text-field>
-          <v-text-field
-              label="Ссылка"
-              v-model="link"
-              ref="link"
-              required
-              counter="80"
-          ></v-text-field>
           <v-textarea
               label="Описание"
               v-model="body"
               counter="250"
-          ></v-textarea>
+          ></v-textarea>	
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -35,6 +28,7 @@
 <script type="text/babel">
   import _ from 'lodash'
   import { mapMutations } from 'vuex'
+  import account from '@/store/modules/account'
   import Api from '@/api'
   import config from '@/config'
   import PanelTitle from '@/components/panel-title.vue'
@@ -44,23 +38,27 @@
       return {
         title: '',
         body: '',
+		author: '',
         appName: config.APP_NAME
       }
+    },
+	mounted () {
+      this.$on('showID', this.author)
     },
     methods: {
       newsAdd () {
         Api.rest({
           method: 'post',
-          url: 'news-add',
+          url: 'communication/create_new_complaint/',
           data: {
             title: this.title,
-            link: this.link,
-            body: this.body
+            description: this.body,
+			author: this.author
           }
         })
           .then((response) => {
             this.newsAddProcedure(response.data)
-            this.$router.push({name: 'Объявления'})
+            this.$router.push({path: '/complaints'})
           })
       },
 	  ...mapMutations({

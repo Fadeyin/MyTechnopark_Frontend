@@ -111,7 +111,7 @@
         })
           .then(response => {
             this.setUser(response.data)
-            this.$router.push({name: 'Index'})
+            this.$router.push({name: 'Объявления'})
           })
           .catch(error => this.gatherErrors(error))
       },

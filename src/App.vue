@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :key="1">
     <toolbar @input="toolbarInput" v-model="drawer"/>
     <sidebar :items="menuItems" ref="sidebar" v-model="drawer"/>
     <loading-spinner :loading="loading"></loading-spinner>

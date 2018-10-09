@@ -1,36 +1,21 @@
 <template>
-<v-container fluid grid-list-lg> 
  <v-layout row wrap>
-  <v-flex xs12 sm6 offset-sm3 >
-  <div v-on:click="showOnCreate(complaints.pk)">
-    <v-card
-      style="margin-bottom: 12px !important;"
-    >
-	  <v-card-text>
-		  <div class="headline">{{complaints.Title}}</div>
+  <v-flex xs12 sm6 offset-sm3>
+  <div v-on:click="show = !show">
+  <v-card>
+	<v-card-title primary-title>
+	  <div slot="header">{{Complaints.Title}}</div>
+			</v-card-title primary-title>
+	 <v-slide-y-transition>
+          <v-card-text v-show="show">
+            {{Complaints.Body}}
           </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-		<div style="visibility: hidden">{{ show }}</div>
-        <div class="right">   
-        </div>
-        </v-card-actions>
-        <v-slide-y-transition>
-          <v-card-text >
-            <span v-html="complaints.Body"></span>
-			<v-divider></v-divider>
-			<div ></div>
-			<span class="grey--text" style="font-size: 0.9em;" >{{changeData(complaints.Status.NewStatus)}}</span>
-			
-			
-          
-		  </v-card-text>
         </v-slide-y-transition>
-    </v-card>
-	</div>
+	</v-card>
+	</div>	
    </v-flex>
-   <v-btn :to="{path: '/complaintsadd'}"  style="margin-bottom: 55px;"
-        color="green lighten-2"
+  <v-btn :to="{name: ''}"  style="margin-bottom: 55px;"
+        color="green"
         fab
         fixed
         bottom
@@ -39,41 +24,39 @@
         <v-icon>add</v-icon>
      </v-btn>
   </v-layout>
- </v-container> 
 </template>
 
 <script>
   import Vue from 'vue'
   import Api from '@/api'
-  import AddComplaints from '@/components/ads-message/addComplaints'
-  Vue.component('my-add-AddComplaints', AddComplaints)
+  import AddNews from '@/components/ads-message/add'
+  Vue.component('my-add-news', AddNews)
     export default {
-      name: 'ComplaintsAdd',
+      name: 'AdsPage',
       data () {
         return {
-		  show: true,
+		  show: false,
 		  news: true,
 		  myMap: false,
-		  complaints:{
-		  pk: "2",
+		  Complaints:{
 		  Title: "Болит голова!",
 		  Body: "Не могу уже голова взрывается :(",
 		  Status:{
 		  NewStatus:"2012-04-23T23:25:43.511Z",
-		  ViewStatus: "2012-04-23T23:30:43.511Z",
-		  ProcessStatus: null,
-		  SuccessStatus: null,
-		  FalseStatus: null,
+		  ViewStatus:false,
+		  ProcessStatus:false,
+		  SuccessStatus:false,
+		  FalseStatus:false,
 		  },
 		  DTime: "2012-04-23T23:25:43.511Z",
 		  }
         }
       },
 	mounted () {
-	this.getC();
+      this.getNews()
     },
 	methods: {
-	getC () {
+	getNews () {
         Api.rest({
           url: 'news',
           method: 'get'
@@ -106,3 +89,5 @@
 	},
 	};
 </script>
+
+

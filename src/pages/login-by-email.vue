@@ -1,6 +1,8 @@
 <template>
+
   <v-flex md6 offset-md3 xs12 class="mt-3">
-    <v-card>
+  <div class="headline">Раздел находится в разработке</div>
+    <v-card class="visibility: hidden;">
       <panel-title :caption="'Вход в ' + appName" ></panel-title>
       <v-card-text>
         <v-form v-model="valid" ref="form">

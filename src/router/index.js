@@ -18,6 +18,7 @@ const ChatsPage = () => import('@/pages/chats')
 const AdsAdd = () => import('@/components/ads-message/add')
 const ComplaintsPage = () => import('@/pages/Complaints')
 const MorePage= () => import('@/pages/more')
+const ComplaintsAdd = () => import('@/components/ads-message/addComplaints')
 
 Vue.use(Router)
 Vue.use(Meta)
@@ -67,6 +68,9 @@ export default new Router({
     {
       path: '/login',
       name: 'Вход',
+	  meta: {
+        icon: 'menu'
+      },
       component: Login,
       beforeEnter: ifNotAuthenticated
     },
@@ -79,6 +83,9 @@ export default new Router({
     {
       path: '/sign-in',
       name: 'Регистрация',
+	  meta: {
+        icon: 'menu'
+      },
       component: SignIn,
       beforeEnter: ifNotAuthenticated
     },
@@ -129,6 +136,15 @@ export default new Router({
         icon: 'dashboard'
       },
       component: AdsAdd,
+	  beforeEnter: ifAuthenticated
+    },
+	{
+      path: '/complaintsadd',
+      name: 'Создать жалобу',
+      meta: {
+        icon: 'warning'
+      },
+      component: ComplaintsAdd,
 	  beforeEnter: ifAuthenticated
     },
     {

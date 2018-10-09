@@ -35,21 +35,54 @@
               :rules="passwordConfirmationRules"
               :error-messages="errors('password_confirmation')"
           ></v-text-field>
-          <v-text-field
-              label="Имя, фамилия, отчество"
-              v-model="username"
+		  <v-text-field
+              label="Имя"
+              v-model="first_name"
               required
               counter="80"
-              :rules="[validation.fieldIsRequired, validation.maximumLength(250)]"
-              :error-messages="errors('username')"
+              :rules="[validation.fieldIsRequired, validation.maximumLength(80)]"
+              :error-messages="errors('first_name')"
           ></v-text-field>
-          <v-textarea
+		  <v-text-field
+              label="Фамилия"
+              v-model="last_name"
+              required
+              counter="80"
+              :rules="[validation.fieldIsRequired, validation.maximumLength(80)]"
+              :error-messages="errors('last_name')"
+          ></v-text-field>
+		  <v-text-field
+              label="Отчество"
+              v-model="patronymic"
+              required
+              counter="80"
+              :rules="[validation.fieldIsRequired, validation.maximumLength(80)]"
+              :error-messages="errors('patronymic')"
+          ></v-text-field>
+		  <v-text-field
+              label="Номер телефона"
+              v-model="phone_number"
+              required
+              counter="80"
+              :rules="[validation.fieldIsRequired, validation.maximumLength(80)]"
+              :error-messages="errors('phone_number')"
+          ></v-text-field>
+		  <v-text-field
+              label="Должность"
+              v-model="position"
+              required
+              counter="80"
+              :rules="[validation.fieldIsRequired, validation.maximumLength(80)]"
+              :error-messages="errors('position')"
+          ></v-text-field>
+		  
+		   <v-textarea
               label="О себе"
-              v-model="about"
+              v-model="about_me"
               counter="250"
               multi-line
               :rules="[validation.maximumLength(250)]"
-              :error-messages="errors('about')"
+              :error-messages="errors('about_me')"
           ></v-textarea>
 
         </v-form>
@@ -57,6 +90,9 @@
       <v-card-actions>
         <v-btn block color="primary" @click="signIn" :disabled="registered">Регистрация</v-btn>
       </v-card-actions>
+	  <v-card-text>
+	  <div>После регистрации ждите подтверждения вашего аккаунта.</div>
+	  </v-card-text>
     </v-card>
   </v-flex>
 </template>
@@ -74,9 +110,13 @@
         email: '',
         password: '',
         password_confirmation: '',
-        username: '',
-        about: '',
-        valid: false,
+        first_name: '',
+		last_name: '',
+		about_me: '',
+		patronymic: '',
+		phone_number: '',
+		position: '',
+		valid: false,
         registered: false,
         validation,
         passwordRules: [
@@ -139,27 +179,21 @@
         }
         Api.rest({
           method: 'post',
-          url: 'sign-in',
+          url: 'users/create/',
           data: {
             email: this.email,
             password: this.password,
             password_confirmation: this.password_confirmation,
-            username: this.username,
-            about: this.about
+			first_name: this.first_name,
+			last_name: this.last_name,
+			about_me: this.about_me,
+			patronymic: this.patronymic,
+			phone_number: this.phone_number,
+			position: this.position
           }
         })
-          .then((response) => {
-            this.loginProcedure({user: response.data, token: response.auth.token})
-            Api.token = response.auth
-            this.$router.push({name: 'Index'})
-          })
-          .catch(error => {
-            this.gatherErrors(error)
-          })
-      },
-      ...mapMutations({
-        loginProcedure: 'account/login'
-      })
+            this.$router.push({name: 'Вход'})
+          }
     },
     components: {
       PanelTitle

@@ -14,7 +14,7 @@ const store = (key, value) => {
 const state = {
   user: stored('user', {}),
   token: stored('token'),
-  news: stored('news')
+  news: stored('news'),
 }
 
 const getters = {

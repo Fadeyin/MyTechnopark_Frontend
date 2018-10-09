@@ -2,17 +2,13 @@
 <v-container fluid grid-list-lg> 
  <v-layout row wrap>
   <v-flex xs12 sm6 offset-sm3 >
-  <div v-for="(news) in news" :key="news.id" v-on:click="showOnCreate(news.id)">
+  <div v-for="(news) in news" :key="news.pk" v-on:click="showOnCreate(news.pk)">
     <v-card
-	  hover
       style="margin-bottom: 12px !important;"
     >
-      <v-card-title primary-title>
-          <div class="headline">{{news.title}}</div>
-		  <p><div class="grey--text" style="font-size: 0.9em; ">{{changeData(DTime)}}</div></p>	  
-      </v-card-title>
 	  <v-card-text>
-            <span class="grey--text">{{ news.link }}</span>
+		  <div class="headline">{{news.title}}</div>
+          <span class="grey--text" style="font-size: 0.9em;" >{{changeData(news.time_publication)}}</span>
           </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
@@ -30,18 +26,18 @@
         <v-spacer></v-spacer>
 		<div style="visibility: hidden">{{ show }}</div>
         <div class="right">   
-		<v-icon>{{ myMap.get(news.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>  
+		<v-icon>{{ myMap.get(news.pk) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>  
         </div>
         </v-card-actions>
 		<v-divider></v-divider>
         <v-slide-y-transition>
-          <v-card-text v-show="myMap.get(news.id)">
-            <span v-html="news.body"></span>
+          <v-card-text v-show="myMap.get(news.pk)">
+            <span v-html="news.description"></span>
           </v-card-text>
         </v-slide-y-transition>
     </v-card>
 	</div> 
-	  <v-btn :to="{name: 'Объявления'}"
+	  <v-btn style="visibility: hidden" :to="{name: 'Объявления'}"
         color="blue-grey lighten-4"
 		block
       >
@@ -72,8 +68,7 @@
         return {
 		  show: false,
 		  news: true,
-		  myMap: false,
-		  DTime: "2012-04-23T23:25:43.511Z"
+		  myMap: false
         }
       },
 	mounted () {
@@ -82,11 +77,11 @@
 	methods: {
 	getNews () {
         Api.rest({
-          url: 'news',
+          url: 'communication/get_visibel_events/',
           method: 'get'
         })
           .then(response => {
-            this.news = response.data
+            this.news = response
 			var myMap = new Map();
 				this.myMap = myMap;
           })

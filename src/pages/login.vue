@@ -109,7 +109,7 @@
         }
         Api.rest({
           method: 'post',
-          url: 'login-traditional',
+          url: 'users/obtain_token/',
           data: {
             email: this.email,
             password: this.password
@@ -118,6 +118,7 @@
           .then((response) => {
             this.loginProcedure({user: response.data, token: response.auth.token})
             Api.token = response.auth
+			this.$emit('showID',response.data.id);
             this.$router.push({name: 'Объявления'})
           })
           .catch(error => {
