@@ -2,29 +2,30 @@
 <v-container fluid grid-list-lg> 
  <v-layout row wrap>
   <v-flex xs12 sm6 offset-sm3 >
-  <div v-on:click="showOnCreate(complaints.pk)">
+  <div v-for="(complaints, index) in complaints" :key="complaints.index" v-on:click="showOnCreate(complaints.pk)">
     <v-card
-      style="margin-bottom: 12px !important;"
+      style="margin-bottom: 6px !important;"
     >
 	  <v-card-text>
-		  <div class="headline">{{complaints.Title}}</div>
-          </v-card-text>
-      <v-divider></v-divider>
+		  <div class="left">
+		  <div class="header">{{complaints.title}}</div>
+          </div>
+		  <div class="right"> 
+		  <v-icon>fiber_new</v-icon>
+		  </div>
+		  </v-card-text>
       <v-card-actions>
-		<div style="visibility: hidden">{{ show }}</div>
-        <div class="right">   
-        </div>
         </v-card-actions>
         <v-slide-y-transition>
-          <v-card-text >
-            <span v-html="complaints.Body"></span>
+          <v-card-text v-show="myMap.get(complaints.pk)">
+            <span v-html="complaints.description"></span>
 			<v-divider></v-divider>
-			<div ></div>
-			<span class="grey--text" style="font-size: 0.9em;" >{{changeData(complaints.Status.NewStatus)}}</span>
-			
-			
-          
+			<span class="grey--text" style="font-size: 0.9em;" >Создание жалобы: {{changeData(complaints.time_creation)}}</span>
+			<div v-for="(statuses, index) in complaints.statuses" :key="index" >
+			<span class="grey--text" style="font-size: 0.9em;" >{{statuses.status_complaint}}: {{changeData(statuses.time_accept_status)}}</span>
+			</div>
 		  </v-card-text>
+		  <div style="visibility: hidden">{{show}}</div>
         </v-slide-y-transition>
     </v-card>
 	</div>
@@ -52,21 +53,13 @@
       data () {
         return {
 		  show: true,
-		  news: true,
 		  myMap: false,
-		  complaints:{
-		  pk: "2",
-		  Title: "Болит голова!",
-		  Body: "Не могу уже голова взрывается :(",
-		  Status:{
-		  NewStatus:"2012-04-23T23:25:43.511Z",
-		  ViewStatus: "2012-04-23T23:30:43.511Z",
-		  ProcessStatus: null,
-		  SuccessStatus: null,
-		  FalseStatus: null,
-		  },
-		  DTime: "2012-04-23T23:25:43.511Z",
-		  }
+		  complaints: true,
+		  statusType:[
+		  {Status: "Просмотрено"},
+		  {Status: "Принимается решение"},
+		  {Status: "Принято решение"},
+		  {Status: "Отказ"}]
         }
       },
 	mounted () {
@@ -75,11 +68,11 @@
 	methods: {
 	getC () {
         Api.rest({
-          url: 'news',
+          url: 'communication/get_all_complaints/',
           method: 'get'
         })
           .then(response => {
-            this.news = response.data
+            this.complaints = response;
 			var myMap = new Map();
 				this.myMap = myMap;
           })
@@ -102,7 +95,7 @@
 		};
 		var ti = (t.toLocaleString("ru", options));
 		return ti;
-	  }	  
-	},
+	  }
+	 },
 	};
 </script>

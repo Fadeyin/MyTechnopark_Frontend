@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-card-text>
-           Этот раздел находится в разработке 
+           Этот раздел находится в разработке
         </v-card-text>
 	</v-card>
 </template>
@@ -13,5 +13,6 @@
         return {
         }
       }
-    }
+	 }
+    
 </script>

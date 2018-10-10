@@ -28,7 +28,7 @@
 <script type="text/babel">
   import _ from 'lodash'
   import { mapMutations } from 'vuex'
-  import account from '@/store/modules/account'
+  import bus from '@/lib/bus.js'
   import Api from '@/api'
   import config from '@/config'
   import PanelTitle from '@/components/panel-title.vue'
@@ -42,9 +42,9 @@
         appName: config.APP_NAME
       }
     },
-	mounted () {
-      this.$on('showID', this.author)
-    },
+	created() {
+	bus.$once('showID', this.author)
+	},
     methods: {
       newsAdd () {
         Api.rest({
@@ -52,8 +52,7 @@
           url: 'communication/create_new_complaint/',
           data: {
             title: this.title,
-            description: this.body,
-			author: this.author
+            description: this.body
           }
         })
           .then((response) => {
@@ -65,6 +64,7 @@
         newsAddProcedure: 'account/newsAdd'
       })
     },
+	
     components: {
       PanelTitle
     }

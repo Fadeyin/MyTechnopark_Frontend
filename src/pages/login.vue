@@ -49,7 +49,6 @@
   import config from '@/config'
   import validation from '@/lib/validation-rules.js'
   import PanelTitle from '@/components/panel-title.vue'
-
   export default {
     name: 'Login',
     data () {
@@ -118,7 +117,6 @@
           .then((response) => {
             this.loginProcedure({user: response.data, token: response.auth.token})
             Api.token = response.auth
-			this.$emit('showID',response.data.id);
             this.$router.push({name: 'Объявления'})
           })
           .catch(error => {
