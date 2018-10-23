@@ -11,12 +11,19 @@
               required
               counter="80"
           ></v-text-field>
+		  <v-combobox
+          v-model="select"
+          :items="items"
+          chips
+          label="Выберете тип заявки"
+          ></v-combobox>
           <v-textarea
               label="Описание"
               v-model="body"
               counter="250"
           ></v-textarea>	
         </v-form>
+		
       </v-card-text>
       <v-card-actions>
         <v-btn block color="primary" @click="newsAdd" >Создать</v-btn>
@@ -35,13 +42,31 @@
     name: 'AddNews',
     data () {
       return {
+	  select: 'Programming',
+        items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify'
+        ],
         title: '',
         body: '',
 		author: '',
+		list: true,
         appName: config.APP_NAME
       }
     },
     methods: {
+		getReq () {
+        Api.rest({
+          url: 'communication/get_request_list/',
+          method: 'get'
+        })
+          .then(response => {
+            this.list = response;
+          })
+      },
+	
       newsAdd () {
         Api.rest({
           method: 'post',

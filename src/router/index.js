@@ -14,11 +14,15 @@ const ResetPassword = () => import('@/pages/reset-password')
 const SignIn = () => import('@/pages/sign-in')
 const AdsPage = () => import('@/pages/ads')
 const RequestPage = () => import('@/pages/request')
+const RequestAdd = () => import('@/components/ads-message/addRequest')
+const RequestUpdate = () => import('@/pages/UpdateRequest')
 const ChatsPage = () => import('@/pages/chats')
 const AdsAdd = () => import('@/components/ads-message/add')
 const ComplaintsPage = () => import('@/pages/Complaints')
 const MorePage= () => import('@/pages/more')
 const ComplaintsAdd = () => import('@/components/ads-message/addComplaints')
+const ComplaintsUpdate = () => import('@/pages/UpdateComplaints')
+
 
 Vue.use(Router)
 Vue.use(Meta)
@@ -138,15 +142,6 @@ export default new Router({
       component: AdsAdd,
 	  beforeEnter: ifAuthenticated
     },
-	{
-      path: '/complaintsadd',
-      name: 'Создать жалобу',
-      meta: {
-        icon: 'warning'
-      },
-      component: ComplaintsAdd,
-	  beforeEnter: ifAuthenticated
-    },
     {
       path: '/request',
       name: 'Заявки',
@@ -154,6 +149,25 @@ export default new Router({
         icon: 'assignment'
       },
       component: RequestPage,
+	  beforeEnter: ifAuthenticated
+    },
+	{
+      path: '/request/add',
+      name: 'Создать заявку',
+      meta: {
+        icon: 'assignment'
+      },
+      component: RequestAdd,
+	  beforeEnter: ifAuthenticated
+    },
+	{
+      path: '/request/update/:id&&:title&&:des',
+      name: 'редактировать',
+      meta: {
+        icon: 'assignment'
+      },
+	  params: { id: 'id', title: 'title', des: 'des'},
+      component: RequestUpdate,
 	  beforeEnter: ifAuthenticated
     },
     {
@@ -172,6 +186,25 @@ export default new Router({
         icon: 'warning'
       },
 	  component: ComplaintsPage,
+	  beforeEnter: ifAuthenticated
+    },
+	{
+      path: '/complaints/add',
+      name: 'Создать жалобу',
+      meta: {
+        icon: 'warning'
+      },
+      component: ComplaintsAdd,
+	  beforeEnter: ifAuthenticated
+    },
+	{
+      path: '/complaints/update/:id&&:title&&:des',
+      name: 'Редактировать',
+      meta: {
+        icon: 'warning'
+      },
+	  params: { id: 'id', title: 'title', des: 'des'},
+      component: ComplaintsUpdate,
 	  beforeEnter: ifAuthenticated
     },
 	{

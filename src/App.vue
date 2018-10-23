@@ -1,7 +1,6 @@
 <template>
   <v-app :key="1">
     <toolbar @input="toolbarInput" v-model="drawer"/>
-    <sidebar :items="menuItems" ref="sidebar" v-model="drawer"/>
     <loading-spinner :loading="loading"></loading-spinner>
     <message/>
     <bottom-nav />
@@ -45,22 +44,6 @@ export default {
     }
   },
   computed: {
-    menuItems () {
-      let result = []
-      if (this.isAuthenticated) {
-        result.push({
-          text: 'Zone 1',
-          icon: 'mdi-file-image',
-          to: {path: '/ads'}
-        })
-        result.push({
-          text: 'Zone 2',
-          icon: 'mdi-file-image',
-          to: {path: '/2'}
-        })
-      }
-      return result
-    },
     ...mapGetters('account', [
       'isAuthenticated',
       'token',

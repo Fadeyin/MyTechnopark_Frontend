@@ -15,11 +15,13 @@ const state = {
   user: stored('user', {}),
   token: stored('token'),
   news: stored('news'),
+  complaint: stored('news', {})
 }
 
 const getters = {
   user: state => state.user,
   token: state => state.token,
+  complaint: state => state.complaint,
   isAuthenticated: state => Boolean(state.token),
   mustChangePassword: state => Boolean(state.user) && (state.user.status === 'reset')
 }
@@ -38,6 +40,10 @@ const mutations = {
   newsAdd: (state, news ) => {
     state.news = news
     store('news', state.news)
+  },
+  complaintUpdate: (state, complaint ) => {
+    state.complaint = complaint
+    store('complaint', state.complaint)
   },
   logout: state => {
     state.user = {}
